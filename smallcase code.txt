@@ -1,0 +1,19 @@
+package testing;
+
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+
+public class DataValidation {
+     
+	@Test
+	public void testGet()
+	{
+		RestAssured.baseURI ="https://bookstore.toolsqa.com/BookStore/v1/Books";
+		 given().get("/users?page=2").then().assertThat().body(matchesJsonSchemaInClasspath("schema.json")).
+		 statusCode(200);// it will return the data type true or not and if there will be any change it will let us know
+	}
+}
